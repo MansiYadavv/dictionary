@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import './dictionary.css';
 const XDictionary = () => {
   const dictionary = [
     { word: "React", meaning: "A JavaScript library for building user interfaces." },
@@ -8,7 +8,7 @@ const XDictionary = () => {
   ];
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [definition, setDefinition] = useState(null);
+  const [definition, setDefinition] = useState("");
 
   const handleSearch = () => {
     if (searchTerm.trim() === "") {
@@ -19,30 +19,24 @@ const XDictionary = () => {
     const foundWord = dictionary.find(
       (entry) => entry.word.toLowerCase() === searchTerm.toLowerCase()
     );
+
     setDefinition(foundWord ? foundWord.meaning : "Word not found in the dictionary.");
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div className="container">
       <h1>Dictionary App</h1>
-      <input
-        data-testid="search-input"
-        type="text"
-        placeholder="Enter a word to search..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ padding: "12px", fontSize: "18px", width: "320px", marginRight: "10px" }}
-      />
-      <button
-        data-testid="search-button"
-        onClick={handleSearch}
-        style={{ padding: "12px", fontSize: "18px" }}
-      >
-        Search
-      </button>
-      <div data-testid="definition-result" style={{ marginTop: "20px" }}>
-        <h3>Definition:</h3>
-        <p>{definition !== null ? definition : "Waiting for search..."}</p>
+      <div className="search-box">
+        <input
+          type="text"
+          placeholder="Search for a word..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
+      <div className="definition-box">
+        <strong>Definition:</strong> <span>{definition}</span>
       </div>
     </div>
   );
