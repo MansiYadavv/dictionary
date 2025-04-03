@@ -8,7 +8,7 @@ const XDictionary = () => {
   ];
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [definition, setDefinition] = useState("");
+  const [definition, setDefinition] = useState(null);
 
   const handleSearch = () => {
     if (searchTerm.trim() === "") {
@@ -24,7 +24,7 @@ const XDictionary = () => {
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>XDictionary</h1>
+      <h1>Dictionary App</h1>
       <input
         data-testid="search-input"
         type="text"
@@ -41,16 +41,8 @@ const XDictionary = () => {
         Search
       </button>
       <div data-testid="definition-result" style={{ marginTop: "20px" }}>
-        {definition && (
-          definition === "Word not found in the dictionary." ? (
-            <p>Word not found in the dictionary.</p>
-          ) : (
-            <div>
-              <h3>Definition:</h3>
-              <p>{definition}</p>
-            </div>
-          )
-        )}
+        <h3>Definition:</h3>
+        <p>{definition !== null ? definition : "Waiting for search..."}</p>
       </div>
     </div>
   );
